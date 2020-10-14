@@ -1,4 +1,3 @@
-server/logs/
 server/__pycache__/
 server/util/db.logs/
 server/util/__pycache__/

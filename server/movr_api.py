@@ -15,6 +15,9 @@ db_access = DatabaseController('res/mysql_data.cfg')
 Routes
 
 """
+@movr_api.route("/test", methods=['GET'])
+def test():
+	return 'Hello World', status.HTTP_200_OK
 
 @movr_api.route("/getMovies", methods=['GET'])
 def get_movies():

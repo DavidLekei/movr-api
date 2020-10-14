@@ -1,5 +1,3 @@
 runtime: python37
-api_version: 1
-threadsafe: true
 
 entrypoint: gunicorn -b :5000 movr_api:movr_api

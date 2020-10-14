@@ -27,14 +27,18 @@ def get_movies():
 
 	db_access.print_db_info()
 
-	films = []
+	#films = []
+	films = dict()
 
 	for i in range(0, 20):
 		random_film_id = get_random_film_id(service, genres[0])
-		print('Randomly Generated Film ID: {}'.format(random_film_id))
-		films.append(get_film_info(service, random_film_id))
+		#print('Randomly Generated Film ID: {}'.format(random_film_id))
+		print(i)
+		#films.append(get_film_info(service, random_film_id))
+		films[i] = get_film_info(service, random_film_id)
 
-	print('Film List: ', films)
+	#print('Film List: ', films)
+	return jsonify(films), status.HTTP_200_OK
 
 
 def get_random_film_id(service, genre):
@@ -62,4 +66,5 @@ def get_number_of_films(service, genre):
 
 if __name__ == "__main__":
 	logging.basicConfig(filename='logs/movr_api_log.log', level=logging.DEBUG)
+	movr_api.config['JSON_SORT_KEYS'] = False
 	movr_api.run();

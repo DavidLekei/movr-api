@@ -1,1 +1,12 @@
 runtime: python37
+api_version: 1
+threadsafe: true
+
+#entrypoint: gunicorn -b :$PORT movr_api:movr_api
+handlers:
+- url: /.*
+  script: movr_api.movr_api
+
+libraries:
+- name: flask
+  version: 1.1.2

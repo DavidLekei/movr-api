@@ -2,7 +2,4 @@ runtime: python37
 api_version: 1
 threadsafe: true
 
-#entrypoint: gunicorn -b :$PORT movr_api:movr_api
-handlers:
-- url: /.*
-  script: movr_api.movr_api
+entrypoint: gunicorn -b :5000 movr_api:movr_api

@@ -1,1 +1,98 @@
 INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [15/Oct/2020 09:52:37] "[37mGET /test HTTP/1.1[0m" 200 -
+ERROR:movr_api:Exception on /getMovies [GET]
+Traceback (most recent call last):
+  File "C:\Users\David\AppData\Local\Programs\Python\Python37\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\David\AppData\Local\Programs\Python\Python37\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\David\AppData\Local\Programs\Python\Python37\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\David\AppData\Local\Programs\Python\Python37\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\David\AppData\Local\Programs\Python\Python37\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\David\AppData\Local\Programs\Python\Python37\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "movr_api.py", line 28, in get_movies
+    genres = get_genres_as_list(genres)
+  File "movr_api.py", line 61, in get_genres_as_list
+    return genres.split(",")
+AttributeError: 'NoneType' object has no attribute 'split'
+INFO:werkzeug:127.0.0.1 - - [15/Oct/2020 09:52:43] "[35m[1mGET /getMovies HTTP/1.1[0m" 500 -
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+ERROR:movr_api:Exception on /getMovies [GET]
+Traceback (most recent call last):
+  File "C:\Users\David\AppData\Local\Programs\Python\Python37\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\David\AppData\Local\Programs\Python\Python37\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\David\AppData\Local\Programs\Python\Python37\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\David\AppData\Local\Programs\Python\Python37\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\David\AppData\Local\Programs\Python\Python37\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\David\AppData\Local\Programs\Python\Python37\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "movr_api.py", line 28, in get_movies
+    genres = get_genres_as_list(genres)
+  File "movr_api.py", line 61, in get_genres_as_list
+    return genres.split(",")
+AttributeError: 'NoneType' object has no attribute 'split'
+INFO:werkzeug:127.0.0.1 - - [15/Oct/2020 09:54:02] "[35m[1mGET /getMovies?service=netflix&genre=action&numFilms=20 HTTP/1.1[0m" 500 -
+ERROR:movr_api:Exception on /getMovies [GET]
+Traceback (most recent call last):
+  File "C:\Users\David\AppData\Local\Programs\Python\Python37\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\David\AppData\Local\Programs\Python\Python37\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\David\AppData\Local\Programs\Python\Python37\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\David\AppData\Local\Programs\Python\Python37\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\David\AppData\Local\Programs\Python\Python37\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\David\AppData\Local\Programs\Python\Python37\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "movr_api.py", line 28, in get_movies
+    genres = get_genres_as_list(genres)
+  File "movr_api.py", line 61, in get_genres_as_list
+    return genres.split(",")
+AttributeError: 'NoneType' object has no attribute 'split'
+INFO:werkzeug:127.0.0.1 - - [15/Oct/2020 09:54:08] "[35m[1mGET /getMovies?service=netflix&genre=action&numFilms=20 HTTP/1.1[0m" 500 -
+INFO:root:Request from [TODO] with parameters: 
+	Service: netflix
+	num_films: 20
+	genres: ['action']
+ERROR:movr_api:Exception on /getMovies [GET]
+Traceback (most recent call last):
+  File "C:\Users\David\AppData\Local\Programs\Python\Python37\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\David\AppData\Local\Programs\Python\Python37\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\David\AppData\Local\Programs\Python\Python37\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\David\AppData\Local\Programs\Python\Python37\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\David\AppData\Local\Programs\Python\Python37\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\David\AppData\Local\Programs\Python\Python37\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "movr_api.py", line 41, in get_movies
+    films[i] = get_film_info(service, random_film_id)
+  File "movr_api.py", line 64, in get_film_info
+    return db_access.get_film_info(service, film_id)
+  File "C:\UOFM\Projects\movr\api\server\util\DatabaseController.py", line 86, in get_film_info
+    return film_info
+UnboundLocalError: local variable 'film_info' referenced before assignment
+INFO:werkzeug:127.0.0.1 - - [15/Oct/2020 09:55:17] "[35m[1mGET /getMovies?service=netflix&genres=action&numFilms=20 HTTP/1.1[0m" 500 -
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:root:Request from [TODO] with parameters: 
+	Service: netflix
+	num_films: 20
+	genres: ['action']
+INFO:werkzeug:127.0.0.1 - - [15/Oct/2020 09:57:25] "[37mGET /getMovies?service=netflix&genres=action&numFilms=20 HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [15/Oct/2020 10:02:29] "[33mGET / HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [15/Oct/2020 10:02:31] "[37mGET /test HTTP/1.1[0m" 200 -

@@ -69,7 +69,8 @@ class DatabaseController:
 
 	def get_film_info(self, service, film_id):
 		cursor = self.db.cursor()
-
+		film_info = None
+		
 		sql = "SELECT * FROM {} WHERE film_id={}".format(service, film_id)
 
 		print('Searching {} Table For {} id'.format(service, film_id))

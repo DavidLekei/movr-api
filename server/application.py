@@ -2,24 +2,24 @@ from flask import Flask, request, jsonify, json
 from flask_api import status
 from datetime import datetime
 
-import logging
 import random
+import logging
 
 from util.DatabaseController import DatabaseController
 import util.constants as constants
 
-movr_api = Flask(__name__)
+application = Flask(__name__)
 db_access = DatabaseController('res/mysql_data.cfg')
 
-"""
-Routes
+@application.route('/')
+def hello():
+	return 'MOVR Home Page with Flask imports, flask_api, datetime, random and logging'
 
-"""
-@movr_api.route("/test", methods=['GET'])
+@application.route("/test", methods=['GET'])
 def test():
-	return 'Hello World', status.HTTP_200_OK
+	return 'MOVR Running on Amazon Elastic Beanstalk connected to an Amazon RDS MySQL Database', status.HTTP_200_OK
 
-@movr_api.route("/getMovies", methods=['GET'])
+@application.route("/getMovies", methods=['GET'])
 def get_movies():
 	service = request.args.get('service')
 	num_films = request.args.get('numFilms')
@@ -66,8 +66,7 @@ def get_film_info(service, film_id):
 def get_number_of_films(service, genre):
 	return constants.service_genre_sizes['{}_{}_size'.format(service, genre)]
 
-
 if __name__ == "__main__":
-	logging.basicConfig(filename='logs/movr_api_log.log', level=logging.DEBUG)
-	movr_api.config['JSON_SORT_KEYS'] = False
-	movr_api.run();
+	application.config['JSON_SORT_KEYS'] = False
+	application.debug = True
+	application.run()

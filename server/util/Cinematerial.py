@@ -2,11 +2,12 @@ import constants
 import sys
 import requests
 import shutil
+import traceback
 
 from bs4 import BeautifulSoup
 
 from DatabaseController import DatabaseController
-from DatabaseBuilder import MovieBuilder
+from ImageUtils import ImageUtils
 
 class Cinematerial:
 
@@ -34,7 +35,7 @@ class Cinematerial:
 		row = table.find('tr')
 		src = row.find('a')['href']
 		src = str(src)
-		return c.base_url + src
+		return self.base_url + src
 
 
 	def get_image_url(self, movie_url):
@@ -59,12 +60,26 @@ class Cinematerial:
 			raise Exception
 
 		html = BeautifulSoup(res.text, 'html.parser')
-		div = html.find('div', attrs={'class':'row'})
-		img = div.find('img')['src']
+		img = html.find('img', attrs={'id':'poster'})['src']
 		return img
 
-	def run(self, file):
-		mb = MovieBuilder()
+	def get_poster(self, film_name, imdb_id):
+		imageUtils = ImageUtils()
+		image_path = '../res/hd_posters/{}.jpg'
+
+		try:
+			movie_url = self.search(film_name)
+			image_url = self.get_image_url(movie_url)
+			image_src = self.get_image_src(image_url)
+			imageUtils.write_image_to_file(image_src, image_path.format(imdb_id))
+		except Exception as e:
+			print('ERROR: Failed to find poster for: ', film_name)
+			print(e)
+			traceback.print_exc()
+
+
+	def get_posters(self, file):
+		imageUtils = ImageUtils()
 		image_path = '../res/hd_posters/{}.jpg'
 		try:
 			movie_list = open(file, 'r', encoding='utf-8')
@@ -80,7 +95,7 @@ class Cinematerial:
 					movie_url = self.search(movie)
 					image_url = self.get_image_url(movie_url)
 					image_src = self.get_image_src(image_url)
-					mb.write_image_to_file(image_src, image_path.format(count))
+					imageUtils.write_image_to_file(image_src, image_path.format(count))
 					count = count + 1
 				except:
 					pass
@@ -89,8 +104,7 @@ class Cinematerial:
 if __name__ == '__main__':
 	#Run Tests
 	c = Cinematerial()
-	c.run('../../movie_lists/netflix_action.txt')
-	# movie_url = c.search('Geralds Gamess')
-	# image_url = c.get_image_url(movie_url)
-	# image_src = c.get_image_src(image_url)
-	# mb.write_image_to_file(image_src, '../res/hd_posters/test_poster.jpg')
+	c.get_poster('Jurassic World: Fallen Kingdom', 'tt123456')
+	#c.get_poster('Venom', 'tt1270797')
+	#c.get_posters('../../movie_lists/netflix_action.txt')
+	

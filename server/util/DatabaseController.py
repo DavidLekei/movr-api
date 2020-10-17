@@ -1,6 +1,8 @@
 import mysql.connector
 import configparser
 
+from FilmInfo import FilmInfo
+
 class DatabaseController:
 
 	def __init__(self, mysql_file):
@@ -41,14 +43,13 @@ class DatabaseController:
 			cursor.close()
 			return films
 
-	def insert_film(self, service, film_id, film_name):
-		print('Inserting into {} table: {} - {}'.format(service, film_id, film_name))
+	def insert_film(self, service, film_id, film_info):
+		print('Inserting into {} table: {} - {}'.format(service, film_id, film_info.name))
 		cursor = self.db.cursor()
-		film_name = film_name.strip()
 
-		sql = "INSERT INTO {} (film_id, film_name) VALUES (%s, %s)".format(service)
+		sql = "INSERT INTO {} (film_id, film_name, imdb_id, film_desc, rating, year) VALUES (%s, %s, %s, %s, %s, %s)".format(service)
 
-		data = (film_id, film_name)
+		data = (film_id, film_info.name, film_info.imdb_id, film_info.description, film_info.rating, film_info.year)
 
 		#TODO: Protect against duplicate entries
 		try:
@@ -122,20 +123,22 @@ class DbTests:
 		self.db = DatabaseController('../res/mysql_data.cfg')
 		print('Starting DbTests...')
 
-		count = self.db.get_number_of_films('netflix')
-		print(count)
+		info = FilmInfo('Venom', 'tt1270797', 'Venom was a pretty bad movie. Poor Tom Hardy.', 5.7, 2018)
+		self.db.insert_film('netflix', 1010001, info)
+		# count = self.db.get_number_of_films('netflix')
+		# print(count)
 
-		wreck_it_ralph = self.db.get_film_info('netflix', 10300131)
-		print(wreck_it_ralph)
+		# wreck_it_ralph = self.db.get_film_info('netflix', 10300131)
+		# print(wreck_it_ralph)
 
-		#10100146 | The Ridiculous 6                                   |    NULL
-		self.db.add_imdb_id('netflix', 2479478, 10100146)
-		ridic6 = self.db.get_film_info('netflix', 10100146)
-		print(ridic6)
+		# #10100146 | The Ridiculous 6                                   |    NULL
+		# self.db.add_imdb_id('netflix', 2479478, 10100146)
+		# ridic6 = self.db.get_film_info('netflix', 10100146)
+		# print(ridic6)
 
-		self.db.add_film_desc('netflix', 'The Ridiculous 6', 10100146)
-		ridic6 = self.db.get_film_info('netflix', 10100146)
-		print(ridic6)
+		# self.db.add_film_desc('netflix', 'The Ridiculous 6', 10100146)
+		# ridic6 = self.db.get_film_info('netflix', 10100146)
+		# print(ridic6)
 
 if __name__ == '__main__':
 	tests = DbTests()

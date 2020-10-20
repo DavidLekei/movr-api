@@ -1,7 +1,7 @@
 import mysql.connector
 import configparser
 
-from FilmInfo import FilmInfo
+from .FilmInfo import FilmInfo
 
 class DatabaseController:
 
@@ -55,8 +55,9 @@ class DatabaseController:
 		try:
 			cursor.execute(sql, data)
 			self.db.commit()
-		except:
+		except Exception as e:
 			print('[x] DatabaseController.insert_film() - An Error Occurred')
+			print(e)
 		finally:
 			cursor.close()
 
@@ -71,7 +72,7 @@ class DatabaseController:
 	def get_film_info(self, service, film_id):
 		cursor = self.db.cursor()
 		film_info = None
-		
+			
 		sql = "SELECT * FROM {} WHERE film_id={}".format(service, film_id)
 
 		print('Searching {} Table For {} id'.format(service, film_id))
@@ -81,7 +82,7 @@ class DatabaseController:
 			cursor.execute(sql)
 			film_info = cursor.fetchone()
 			self.db.commit()
-		except mysql.connector.Error as err:
+		except Exception as err:
 			print('[x] DatabaseController.get_film_info() - {}'.format(err))
 		finally:
 			cursor.close()
@@ -123,8 +124,11 @@ class DbTests:
 		self.db = DatabaseController('../res/mysql_data.cfg')
 		print('Starting DbTests...')
 
-		info = FilmInfo('Venom', 'tt1270797', 'Venom was a pretty bad movie. Poor Tom Hardy.', 5.7, 2018)
-		self.db.insert_film('netflix', 1010001, info)
+		info = self.db.get_film_info('netflix', 10100001)
+		print(info)
+
+		#info = FilmInfo('Venom', 'tt1270797', 'Venom was a pretty bad movie. Poor Tom Hardy.', 5.7, 2018)
+		#self.db.insert_film('netflix', 1010001, info)
 		# count = self.db.get_number_of_films('netflix')
 		# print(count)
 

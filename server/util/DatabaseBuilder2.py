@@ -2,6 +2,7 @@ import constants
 import sys
 import requests
 import shutil
+from os import listdir
 
 from DatabaseController import DatabaseController
 from Cinematerial import Cinematerial
@@ -25,6 +26,16 @@ class DatabaseBuilder2:
 
 	def get_poster(self, film_name, imdb_id):
 		self.cin.get_poster(film_name, imdb_id);
+
+	def build_top_100(self):
+		imdb = MyMDb()
+		film_count = 10100000
+		for f in listdir('C:/Users/David/Desktop/imdb_top_100/'):
+			film_id = film_count
+			imdb_id = f.split('.')[0]
+			info = imdb.get_film_info_ii(imdb_id)
+			self.db.insert_film('imdb_top_100', film_id, info)
+			film_count = film_count + 1
 
 
 	def build(self, input_file, start_film_id):
@@ -61,6 +72,7 @@ class DatabaseBuilder2:
 
 if __name__ == '__main__':
 	db = DatabaseBuilder2()
-	db.run()
-	db.build('suzie', 'action')
+	db.build_top_100()
+	# db.run()
+	# db.build('suzie', 'action')
 

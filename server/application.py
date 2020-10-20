@@ -19,6 +19,17 @@ def hello():
 def test():
 	return 'MOVR Running on Amazon Elastic Beanstalk connected to an Amazon RDS MySQL Database', status.HTTP_200_OK
 
+@application.route("/getTop100", methods=['GET'])
+def getTop100():
+	db_access.print_db_info()
+	films = dict()
+	base_film_id = 10100000
+	for i in range(0, 47):
+		film_id = base_film_id + i
+		films[i] = get_film_info('imdb_top_100', film_id)
+
+	return jsonify(films), status.HTTP_200_OK
+
 @application.route("/getMovies", methods=['GET'])
 def get_movies():
 	service = request.args.get('service')

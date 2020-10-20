@@ -11,6 +11,15 @@ class MyMDb:
 	def __init__(self):
 		pass
 
+	def get_film_info_ii(self, imdb_id):
+		page = self.get_imdb_page(imdb_id)
+		film_name = self.get_name(page)
+		description = self.get_description(page)
+		year = self.get_year(page)
+		rating = self.get_rating(page)
+		info = FilmInfo(film_name, imdb_id, description, year, rating)
+		return info
+
 	def get_film_info(self, film_name):
 		imdb_id = self.get_id(film_name)
 		page = self.get_imdb_page(imdb_id)
@@ -19,6 +28,12 @@ class MyMDb:
 		rating = self.get_rating(page)
 		info = FilmInfo(film_name, imdb_id, description, year, rating)
 		return info
+
+	def get_name(self, page):
+		title_wrapper = page.find('div', class_='title_wrapper')
+		h1 = title_wrapper.find('h1')
+		title = h1.text.split('(')[0]
+		return title
 
 	def get_id(self, film_name):
 		try:
@@ -35,7 +50,7 @@ class MyMDb:
 	def get_imdb_page(self, imdb_id):
 		try:
 			search_url = self.base_title_url.format(imdb_id)
-			print(search_url)
+			print('Searching for: ', search_url)
 			res = requests.get(search_url);
 			return BeautifulSoup(res.text, 'html.parser')
 		except:
@@ -81,4 +96,3 @@ class MyMDb:
 if __name__ == '__main__':
 	mymdb = MyMDb()
 	info = mymdb.get_film_info('Venom')
-	print(info.imdb_id)

@@ -22,9 +22,7 @@ movr-api will return JSON data containing:
 
 ## Technology used
 
-movr was developed in Android Studio using Flutter for cross platform on Android/iOS.
-
-movr-api is written in Pythong using the Flask framework, running on Amazon's ElasticBeanstalk.
+movr-api is written in Python using the Flask framework, running on Amazon's ElasticBeanstalk.
 
 All movie data was scraped from the web using scrapers I wrote in Python. 
 

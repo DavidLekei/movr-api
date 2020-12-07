@@ -1,6 +1,6 @@
 # movr-api
 
-HTTP API server for [movr][https://github.com/DavidLekei/movr]
+HTTP API server for [movr](https://github.com/DavidLekei/movr)
 
 (DISCLAIMER: This project is still a work in progress. In it's current state, it serves as a high fidelity prototype.)
 
@@ -65,6 +65,10 @@ A simple data class used to pass information about a Film (Title/Rating/Year/Des
 #### ImageUtils.py
 
 Provides utility methods for handling Images. This was used to save the Posters to disk.
+
+### MyMDB.py
+
+A web-scraper class used to retrive Film Information from IMDb.com
 
 #### PosterBuilder.py
 

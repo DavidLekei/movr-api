@@ -10,3 +10,4 @@ backup.sql
 /server/movr_tests
 /server/__pycache__/
 /server/util/__pycache__/
+/server/logs/*

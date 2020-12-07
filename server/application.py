@@ -4,6 +4,7 @@ from datetime import datetime
 
 import random
 import logging
+import threading
 
 from util.DatabaseController import DatabaseController
 import util.constants as constants
@@ -24,11 +25,31 @@ def getTop100():
 	db_access.print_db_info()
 	films = dict()
 	base_film_id = 10100000
-	for i in range(0, 47):
+	for i in range(0, 10):
 		film_id = base_film_id + i
 		films[i] = get_film_info('imdb_top_100', film_id)
 
 	return jsonify(films), status.HTTP_200_OK
+
+def thread_get_movies(thread_id, service):
+	pass
+
+
+@application.route("/getMovies_t", methods=['GET'])
+def get_movies_t():
+	#Process services first
+	services = request.args.get('services')
+	if(services == None):
+		return "No Services Provided", status.HTTP_400_BAD_REQUEST
+	services = as_list(services)
+	for service in services:
+		try:
+			thread.start_new_thread(thread_get_movies, ('{}-thread'.format(service), service, 0))
+			return 'Threading Not Implemented Yet'
+		except:
+			print('Thread Exception')
+
+
 
 @application.route("/getMovies", methods=['GET'])
 def get_movies():
@@ -67,6 +88,9 @@ def get_random_film_id(service, genre):
 	film_id = service_code + genre_code + film_code
 
 	return film_id
+
+def as_list(obj):
+	return obj.split(",")
 
 def get_genres_as_list(genres):
 	return genres.split(",")

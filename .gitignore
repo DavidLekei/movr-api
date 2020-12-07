@@ -6,8 +6,7 @@
 
 backup.sql
 /movie_lists/
-/server/res/posters
-/server/res/hd_posters
+/server/res/*
 /server/movr_tests
 /server/__pycache__/
 /server/util/__pycache__/
